@@ -32,6 +32,8 @@ import org.springframework.core.env.Environment;
  * @author Phillip Webb
  * @author Madhura Bhave
  * @since 1.5.0
+ *
+ * 我们试着找一下有哪些对应事件的响应可以响应这个ApplicationStartingEvent
  */
 @SuppressWarnings("serial")
 public class ApplicationStartingEvent extends SpringApplicationEvent {

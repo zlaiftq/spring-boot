@@ -88,6 +88,9 @@ import org.springframework.util.StringUtils;
  * @author HaiTao Zhang
  * @since 2.0.0
  * @see LoggingSystem#get(ClassLoader)
+ *
+ * 这个类继承自ApplicationListener<ApplicationEvent>，有监听事件的方法public void onApplicationEvent(ApplicationEvent event)，
+ * 当有相应事件发布就会触发对应的逻辑
  */
 public class LoggingApplicationListener implements GenericApplicationListener {
 
@@ -207,6 +210,10 @@ public class LoggingApplicationListener implements GenericApplicationListener {
 		return false;
 	}
 
+	/**
+	 * 监听器对应的监听方法
+	 * @param event
+	 */
 	@Override
 	public void onApplicationEvent(ApplicationEvent event) {
 		if (event instanceof ApplicationStartingEvent) {
@@ -227,6 +234,14 @@ public class LoggingApplicationListener implements GenericApplicationListener {
 		}
 	}
 
+	/**
+	 * 然后找到发布ApplicationStartingEvent的位置
+	 *
+	 * 然后这个方法所在LoggingApplicationListener类，这个类继承自ApplicationListener<ApplicationEvent>，
+	 * 有监听事件的方法public void onApplicationEvent(ApplicationEvent event)，当有相应事件发布就会触发对应的逻辑
+	 *
+	 * @param event
+	 */
 	private void onApplicationStartingEvent(ApplicationStartingEvent event) {
 		this.loggingSystem = LoggingSystem.get(event.getSpringApplication().getClassLoader());
 		this.loggingSystem.beforeInitialize();
